@@ -4,3 +4,4 @@ target/
 .hc
 .cargo/
 .vscode/
+__generated__/

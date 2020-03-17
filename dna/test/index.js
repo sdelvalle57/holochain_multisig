@@ -73,7 +73,6 @@ orchestrator.registerScenario("Scenario1: Create Multisig", async (s, t) => {
   const multisig_result = await getEntry(alice, multisig_addr.Ok);
 
   const multisig = JSON.parse(multisig_result.Ok.App[1]);
-  console.log("multisig_create", multisig);
   t.deepEqual(multisig, {
     title: "My Multisig",
     description: "This creates a new multisig",
