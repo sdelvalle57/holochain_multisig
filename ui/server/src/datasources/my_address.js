@@ -1,4 +1,6 @@
+require('dotenv').config();
 const { RESTDataSource } = require('apollo-datasource-rest');
+const {getMyAddress} = require('../config');
 
 class MyAddressAPI extends RESTDataSource {
 
@@ -14,39 +16,9 @@ class MyAddressAPI extends RESTDataSource {
     }
 
     async getMyAddress() {
-        const response = await this.callZome('test-instance', 'create_multisig', 'get_my_address')({})
+        const response = await this.callZome(process.env.INSTANCE_NAME, process.env.ZOME_CREATE_MULTISIG, getMyAddress)({})
         return this.myAddressReducer(JSON.parse(response))
     }
 }
 
 module.exports = MyAddressAPI;
-
-/*
-const { RESTDataSource } = require('apollo-datasource-rest');
-
-
-class MyAddressAPI extends RESTDataSource {
-
-    constructor() {
-        super();
-        this.baseURL = 'https://api.spacexdata.com/v2/';
-      }
-
-      launchReducer(launch) {
-        return {
-          id: launch.flight_number || 0,
-          site: launch.launch_site && launch.launch_site.site_name,
-        
-        };
-      }
-
-    async getAllLaunches() {
-        const response = await this.get('launches');
-        return Array.isArray(response)
-          ? response.map(launch => this.launchReducer(launch))
-          : [];
-      }
-}
-
-module.exports = MyAddressAPI;
-*/

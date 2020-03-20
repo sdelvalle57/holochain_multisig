@@ -1,6 +1,8 @@
+require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./schema');
 const MyAddressAPI = require('./datasources/my_address');
+const MultisigAPI = require('./datasources/multisig');
 const { connect } = require('@holochain/hc-web-client');
 const resolvers = require('./resolvers');
 
@@ -21,8 +23,12 @@ const resolvers = require('./resolvers');
         typeDefs,
         resolvers,
         dataSources: () => ({
-            myAddressAPI: new MyAddressAPI({callZome: connection})
-        })
+            myAddressAPI: new MyAddressAPI({callZome: connection}),
+            multisigAPI: new MultisigAPI({callZome: connection}),
+        }),
+        engine: {
+            apiKey: process.env.ENGINE_API_KEY,
+        }
     });
     
     server.listen().then(({ url }) => {
