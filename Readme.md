@@ -12,5 +12,6 @@ Notes. To Test queries and mutations go to http://localhost:4000
 
 Run the Client
 1. `cd ui/client` run `npm i`
-2. run `npm start`
-3. Navigate to http://localhost:3000
+2. run `npm run codegen`
+3. run `npm start`
+4. Navigate to http://localhost:3000
