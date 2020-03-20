@@ -1,3 +1,5 @@
+This repo follows the Apollo tutorial for graphql at https://www.apollographql.com/docs/tutorial/introduction/
+
 Steps:
 
 Run the Server
