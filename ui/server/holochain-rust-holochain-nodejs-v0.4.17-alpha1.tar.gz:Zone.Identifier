@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://github.com/holochain/holochain-rust/releases?after=holochain-nodejs-v0.4.18-alpha1
+HostUrl=https://codeload.github.com/holochain/holochain-rust/tar.gz/holochain-nodejs-v0.4.17-alpha1

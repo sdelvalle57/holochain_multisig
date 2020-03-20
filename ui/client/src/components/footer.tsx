@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 
 import MenuItem from './menu-item';
+import LogoutButton from '../containers/logout-button';
 import { ReactComponent as HomeIcon } from '../assets/icons/home.svg';
 import { ReactComponent as CartIcon } from '../assets/icons/cart.svg';
 import { ReactComponent as ProfileIcon } from '../assets/icons/profile.svg';
@@ -23,6 +24,7 @@ export default function Footer() {
           <ProfileIcon />
           Profile
         </MenuItem>
+        <LogoutButton />
       </InnerContainer>
     </Container>
   );
