@@ -8,26 +8,30 @@ import { ReactComponent as Logo } from '../assets/logo.svg';
 import { ReactComponent as Curve } from '../assets/curve.svg';
 import { ReactComponent as Rocket } from '../assets/rocket.svg';
 import { colors, unit } from '../styles';
+import { CreateMultisigVariables } from '../pages/__generated__/CreateMultisig';
 
 interface LoginFormProps {
-  login: (a: { variables: any }) => void;
+  createMultisig: (a: { variables: CreateMultisigVariables }) => void;
 }
 
 interface LoginFormState {
-  email: string;
+  title: string;
+  description: string;
 }
 
 export default class LoginForm extends Component<LoginFormProps, LoginFormState> {
-  state = { email: '' };
+  state = { title: '', description: '' };
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const email = (event.target as HTMLInputElement).value;
-    this.setState(s => ({ email }));
+    const name = (event.target as HTMLInputElement).name ;
+    const value = (event.target as HTMLInputElement).value;
+   
+    this.setState(s => ({ [name]: value } as Pick<LoginFormState, keyof LoginFormState>));
   };
 
   onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.login({ variables: { email: this.state.email } });
+    this.props.createMultisig({ variables: { title: this.state.title, description: this.state.title } });
   };
 
   render() {
@@ -42,10 +46,14 @@ export default class LoginForm extends Component<LoginFormProps, LoginFormState>
         <StyledForm onSubmit={(e) => this.onSubmit(e)}>
           <StyledInput
             required
-            type="email"
-            name="email"
-            placeholder="Email"
-            data-testid="login-input"
+            name="title"
+            placeholder="Title"
+            onChange={(e) => this.onChange(e)}
+          />
+          <StyledInput
+            required
+            name="description"
+            placeholder="Description"
             onChange={(e) => this.onChange(e)}
           />
           <Button type="submit">Log in</Button>

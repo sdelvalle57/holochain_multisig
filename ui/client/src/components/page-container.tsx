@@ -26,9 +26,9 @@ const Container = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   flexGrow: 1,
-  width: '100%',
-  maxWidth: 600,
+  width: '80%',
   margin: '0 auto',
+  textAlign: 'center',
   padding: unit * 3,
   paddingBottom: unit * 5,
 });

@@ -18,13 +18,13 @@ export default styled('button')({
   fontWeight: 700,
   color: 'white',
   textTransform: 'uppercase',
-  backgroundColor: colors.accent,
+  backgroundColor: colors.primary,
   cursor: 'pointer',
   outline: 'none',
   ':hover': {
-    backgroundColor: lighten(0.1, colors.accent),
+    backgroundColor: lighten(0.1, colors.primary),
   },
   ':active': {
-    backgroundColor: lighten(0.2, colors.accent),
+    backgroundColor: lighten(0.2, colors.primary),
   },
 });
