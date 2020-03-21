@@ -12,7 +12,14 @@ export const CREATE_MULTISIG = gql`
             entry
         }
     }
+`;
 
+export const GET_CREATED_MULTISIG = gql`
+  query GetCreatedMultisig {
+    multisigCreated @client {
+        entry @client
+    } 
+  }
 `;
 
  export default function CreateMultisigFunction() {
@@ -20,10 +27,9 @@ export const CREATE_MULTISIG = gql`
     const [createMultisig, { loading, error }] = useMutation<CreateMultisig, CreateMultisigVariables>(
         CREATE_MULTISIG,
         {
-            variables: { title: "hola", description: "sisas" },
             onCompleted({ createMultisig }) {
                 console.log(createMultisig)
-                client.writeData({ data: { createMultisig }})
+                client.writeData({ data: { multisigCreated: createMultisig }})
                 //localStorage.setItem('token', login as string);
                 //client.writeData({ data: { isLoggedIn: true } });
             }
@@ -33,9 +39,3 @@ export const CREATE_MULTISIG = gql`
     if (error) return <p>An error occurred</p>;
     return <LoginForm createMultisig={createMultisig} />
  }
-
-
-
-
-//   return ;
-// }

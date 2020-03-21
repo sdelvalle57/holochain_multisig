@@ -17,7 +17,6 @@ const GET_MY_ADDRESS = gql`
 `;
 
 interface DashboardProps extends RouteComponentProps {
-
 }
 
 const Dashboard: React.FC<DashboardProps> = () => {
@@ -29,8 +28,6 @@ const Dashboard: React.FC<DashboardProps> = () => {
   } = useQuery<
   MyAddress
   >(GET_MY_ADDRESS);
-
-
 
   
   if (loading) return <p>LOADING</p>;

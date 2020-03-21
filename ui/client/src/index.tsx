@@ -1,9 +1,12 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {GET_CREATED_MULTISIG} from './pages/create-multisig';
+import {typeDefs} from './resolvers';
+
 import Pages from './pages';
 import injectStyles from './styles';
 
@@ -14,13 +17,27 @@ const link = new HttpLink({
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
-  link
+  link,
+  typeDefs
 });
+
+const data = {
+  multisigCreated: null
+}
+
+cache.writeData({
+    data
+});
+
+function RenderPage() {
+  const { data } = useQuery(GET_CREATED_MULTISIG);
+  return  <Pages created={data.multisigCreated} />  
+}
 
 injectStyles();
 ReactDOM.render(
     <ApolloProvider client={client}>    
-        <Pages />  
+        <RenderPage />
     </ApolloProvider>,   
     document.getElementById('root')
 );

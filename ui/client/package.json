@@ -30,6 +30,10 @@
     "run:ios-demo": "npx artillery run apollo-internal-demos/ios-workload.yml",
     "codegen": "apollo client:codegen --target typescript --watch"
   },
+  "resolutions": {
+    "@types/graphql": "14.0.1", 
+    "graphql": "14.4.2"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
