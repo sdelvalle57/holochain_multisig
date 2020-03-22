@@ -4,6 +4,7 @@ const typeDefs = gql`
     
     type Query {
         myAddress: MyAddress,
+        getMultisig(address: String!): Multisig
     }
 
     type Mutation {
@@ -17,8 +18,14 @@ const typeDefs = gql`
     type CreateMultisigResponse {
         entry: String
     }
-`;
 
+    type Multisig {
+        title: String!,
+        description: String!,
+        owners: [String!]!,
+        required: Int!
+    }
+`;
 
 
 module.exports = typeDefs;

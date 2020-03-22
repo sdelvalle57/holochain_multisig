@@ -4,7 +4,7 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {GET_CREATED_MULTISIG} from './pages/create-multisig';
+import {GET_CREATED_MULTISIG} from './queries';
 import {typeDefs} from './resolvers';
 
 import Pages from './pages';
@@ -31,7 +31,7 @@ cache.writeData({
 
 function RenderPage() {
   const { data } = useQuery(GET_CREATED_MULTISIG);
-  return  <Pages created={data.multisigCreated} />  
+  return  <Pages />  
 }
 
 injectStyles();

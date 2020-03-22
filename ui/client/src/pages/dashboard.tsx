@@ -1,20 +1,13 @@
 import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
 import { RouteComponentProps } from '@reach/router';
-import { MyAddress } from './__generated__/MyAddress';
+import { MyAddress } from '../__generated__/MyAddress';
 
 import {Container} from '../components/container';
 import CreateMultisigContainer from './create-multisig';
 
-const GET_MY_ADDRESS = gql`
-  query MyAddress {
-    myAddress {
-      myAddress
-    }
-  }
-`;
+import {GET_MY_ADDRESS} from '../queries';
 
 interface DashboardProps extends RouteComponentProps {
 }

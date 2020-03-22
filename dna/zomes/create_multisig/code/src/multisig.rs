@@ -63,6 +63,10 @@ pub fn create(title: String, description: String) -> ZomeApiResult<Address> {
     Ok(new_multisig_address)
 }
 
+pub fn get(address: Address) -> ZomeApiResult<Multisig> {
+    Multisig::get(address)
+}
+
 /***********Multisig Entry Def */
 pub fn entry_def() -> ValidatingEntryType {
     entry!(

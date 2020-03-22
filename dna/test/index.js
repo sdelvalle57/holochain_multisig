@@ -13,7 +13,7 @@ process.on('unhandledRejection', error => {
   console.error('got unhandledRejection:', error);
 });
 
-const dnaPath = path.join(__dirname, "../dist/multisig.dna.json")
+const dnaPath = path.join(__dirname, "../dist/dna.dna.json")
 
 const orchestrator = new Orchestrator({
   middleware: combine(
@@ -79,6 +79,40 @@ orchestrator.registerScenario("Scenario1: Create Multisig", async (s, t) => {
     owners: [alice.instance("multisig_test").agentAddress],
     required: 1
   })
+  await s.consistency();
+
+})
+
+orchestrator.registerScenario("Scenario2: Create and fetch Multisig", async (s, t) => {
+
+  const  {alice, bob } = await s.players(
+    { alice: conductorConfig, bob: conductorConfig }, 
+    true
+  );
+
+  const multisig_addr = await createMultisig(alice, "My Multisig", "This creates a new multisig")
+  t.ok(multisig_addr);
+  await s.consistency();
+  
+  const multisig_result = await getEntry(alice, multisig_addr.Ok);
+
+  const multisig = JSON.parse(multisig_result.Ok.App[1]);
+  t.deepEqual(multisig, {
+    title: "My Multisig",
+    description: "This creates a new multisig",
+    owners: [alice.instance("multisig_test").agentAddress],
+    required: 1
+  })
+  await s.consistency();
+
+  const fetchedMultisig = await alice.call(
+    "multisig_test", 
+    "create_multisig", 
+    "get",
+    { address: multisig_addr.Ok }
+  )
+  console.log("fetchedMultisig", fetchedMultisig);
+  t.deepEqual(multisig, fetchedMultisig.Ok);
   await s.consistency();
 
 })

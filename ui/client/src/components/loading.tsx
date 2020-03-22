@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'react-emotion';
 import { size } from 'polished';
 
-import { ReactComponent as Logo } from '../assets/logo.svg';
+import { ReactComponent as LoadingLogo } from '../assets/loading.svg';
 import { colors } from '../styles';
 
 const spin = keyframes`
@@ -10,7 +10,7 @@ const spin = keyframes`
   }
 `;
 
-const Loading = styled(Logo)(size(64), {
+const Loading = styled(LoadingLogo)(size(64), {
   display: 'block',
   margin: 'auto',
   fill: colors.grey,

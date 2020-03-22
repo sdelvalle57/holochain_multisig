@@ -23,15 +23,14 @@
     "typescript": "^3.7.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "run:ios-demo": "npx artillery run apollo-internal-demos/ios-workload.yml",
     "codegen": "apollo client:codegen --target typescript --watch"
   },
   "resolutions": {
-    "@types/graphql": "14.0.1", 
+    "@types/graphql": "14.0.1",
     "graphql": "14.4.2"
   },
   "eslintConfig": {
@@ -51,6 +50,8 @@
     "@types/jest": "^24.0.23",
     "apollo": "^2.16.3",
     "artillery": "^1.6.0-26",
-    "npm-watch": "^0.6.0"
+    "customize-cra": "^0.9.1",
+    "npm-watch": "^0.6.0",
+    "react-app-rewired": "^2.1.5"
   }
 }

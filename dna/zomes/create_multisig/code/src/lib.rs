@@ -73,6 +73,11 @@ mod my_zome {
         multisig::create(title, description)
     }
 
+    #[zome_fn("hc_public")]
+    fn get(address: Address) -> ZomeApiResult<multisig::Multisig> {
+        multisig::get(address)
+    }
+
     /************ Multisig Functions Getters */
 
     
