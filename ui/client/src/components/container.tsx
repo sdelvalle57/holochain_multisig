@@ -1,5 +1,4 @@
 import styled from 'react-emotion';
-import { unit } from '../styles';
  
  
  export const SmallContainer = styled('div')({
