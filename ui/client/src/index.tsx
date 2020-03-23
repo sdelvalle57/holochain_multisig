@@ -31,6 +31,7 @@ cache.writeData({
 
 function RenderPage() {
   const { data } = useQuery(GET_CREATED_MULTISIG);
+  console.log(data)
   return  <Pages />  
 }
 

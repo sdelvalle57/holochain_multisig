@@ -37,8 +37,7 @@ import { lighten } from 'polished';
 
   const padding = unit * 2;
   export const StyledLink = styled(Link)(cardClassName, {
-    display: 'block',
-    height: 193,
+    display: 'inline-block',
     width: 650,
     margin: '0  auto',
     ':hover': {

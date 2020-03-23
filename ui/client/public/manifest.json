@@ -1,6 +1,6 @@
 {
-  "short_name": "Launches",
-  "name": "Launches",
+  "short_name": "Multisig",
+  "name": "Holochain Multisig",
   "icons": [
     {
       "src": "favicon.ico",

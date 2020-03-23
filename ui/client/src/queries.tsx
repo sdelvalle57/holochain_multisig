@@ -13,8 +13,22 @@ export const GET_MULTISIG = gql`
         getMultisig(address: $address) {
             title,
             description,
-            owners,
-            required
+            signatories,
+            required,
+            creator
+        }
+    }
+`
+
+export const GET_ALL_MULTISIGS = gql`
+    query Multisigs {
+        getMyMultisigs {
+            title,
+            description,
+            signatories,
+            required,
+            creator,
+            address
         }
     }
 `

@@ -3,10 +3,7 @@ import styled, { css } from 'react-emotion';
 import { size } from 'polished';
 
 import Button from './button';
-import space from '../assets/images/space.jpg';
 import { ReactComponent as Logo } from '../assets/logo.svg';
-import { ReactComponent as Curve } from '../assets/curve.svg';
-import { ReactComponent as Rocket } from '../assets/rocket.svg';
 import { colors, unit } from '../styles';
 import { CreateMultisigVariables } from '../__generated__/CreateMultisig';
 
@@ -74,7 +71,6 @@ const Container = styled('div')({
   paddingBottom: unit * 6,
   color: 'white',
   backgroundColor: colors.primary,
-  backgroundImage: `url(${space})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 });
@@ -97,19 +93,8 @@ const StyledLogo = styled(Logo)(size(56), {
   position: 'relative',
 });
 
-const StyledCurve = styled(Curve)(size('100%'), {
-  fill: colors.primary,
-  position: 'absolute',
-  top: 0,
-  left: 0,
-});
-
 const Heading = styled('h1')({
   margin: `${unit * 3}px 0 ${unit * 6}px`,
-});
-
-const StyledRocket = styled(Rocket)(svgClassName, {
-  width: 250,
 });
 
 const StyledForm = styled('form')({

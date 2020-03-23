@@ -5,7 +5,8 @@ import MenuItem from './menu-item';
 import { ReactComponent as HomeIcon } from '../assets/icons/home.svg';
 import { ReactComponent as CartIcon } from '../assets/icons/cart.svg';
 import { ReactComponent as ProfileIcon } from '../assets/icons/profile.svg';
-import { colors, unit } from '../styles';
+import { colors } from '../styles';
+import { InnerContainer } from './container';
 
 export default function Footer() {
   return (
@@ -41,10 +42,3 @@ const Container = styled('footer')({
   bottom: 0,
 });
 
-const InnerContainer = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  maxWidth: 460,
-  padding: unit * 2.5,
-  margin: '0 auto',
-});

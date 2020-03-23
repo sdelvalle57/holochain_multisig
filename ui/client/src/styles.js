@@ -25,7 +25,6 @@ export default () => injectGlobal({
   '#root': {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100%',
   },
   '*': {
     boxSizing: 'border-box',
