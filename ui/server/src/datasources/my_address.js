@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { RESTDataSource } = require('apollo-datasource-rest');
 const {getMyAddress} = require('../config');
+const {Error} = require('../global-reducers');
 
 class MyAddressAPI extends RESTDataSource {
 
@@ -10,8 +11,10 @@ class MyAddressAPI extends RESTDataSource {
     }
 
     myAddressReducer(myAddress) {
-        return {
-          myAddress: myAddress.Ok,
+        if(myAddress.Ok) {
+            return {  myAddress: myAddress.Ok }
+        } else if(myAddress.Err) {
+            return Error(response.Err)
         }
     }
 

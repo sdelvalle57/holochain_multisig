@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { RESTDataSource } = require('apollo-datasource-rest');
-const {createMultisig, get} = require('../config');
+const {createMultisig, get, getAll} = require('../config');
+const {Error} = require('../global-reducers');
 
 class MyAddressAPI extends RESTDataSource {
 
@@ -10,19 +11,29 @@ class MyAddressAPI extends RESTDataSource {
     }
 
     createMultisigReducer(response) {
-        return {
-          entry: response.Ok,
-        }
+        if(response.Ok) {
+            return {
+                entry: response.Ok,
+              }
+        } else if(response.Err) {
+            return Error(response.Err)
+        } else return null
     }
 
     getMultisigReducer(response) {
-        const {title, description, owners, required} = response.Ok
-        return {
-            title,
-            description,
-            owners,
-            required
-        }
+        if(response.Ok) {
+            const {title, description, signatories, required, creator} = response.Ok
+            return {
+                title,
+                description,
+                signatories,
+                required,
+                creator
+            }
+        } else if(response.Err) {
+            return Error(response.Err)
+        } else return null
+        
     }
 
     async createMultisig(title, description) {
@@ -35,6 +46,18 @@ class MyAddressAPI extends RESTDataSource {
         return this.getMultisigReducer(JSON.parse(response))
     }
 
+    async getAll() {
+        let addresses = await this.callZome(process.env.INSTANCE_NAME, process.env.ZOME_CREATE_MULTISIG, getAll)({})
+        addresses = JSON.parse(addresses).Ok;
+        console.log(addresses.length)
+        const multisigs = []
+        for(let j = 0; j < addresses.length; j++) {
+            const response = await this.get(addresses[j]);
+            response.address = addresses[j]
+            multisigs.push(response)
+        }
+        return multisigs
+    }
 
 }
 

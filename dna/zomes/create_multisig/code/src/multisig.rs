@@ -25,8 +25,9 @@ use serde_json::json;
 pub struct Multisig {
     title: String,
     description: String,
-    owners: Vec<Address>,
-    required: u64
+    signatories: Vec<Address>,
+    required: u64,
+    creator: Address
 }
 
 impl Multisig {
@@ -34,8 +35,9 @@ impl Multisig {
         Multisig {
             title,
             description,
-            owners: vec![AGENT_ADDRESS.clone()],
-            required: 1
+            signatories: vec![AGENT_ADDRESS.clone()],
+            required: 1,
+            creator: AGENT_ADDRESS.clone()
         }
     }
 
@@ -43,12 +45,13 @@ impl Multisig {
         hdk::utils::get_as_type(address.to_string().into())
     }
 
-    pub fn from(title: String, description: String, owners: Vec<Address>, required: u64) -> Self {
+    pub fn from(title: String, description: String, signatories: Vec<Address>, required: u64, creator: Address) -> Self {
         Multisig {
             title,
             description,
-            owners,
-            required
+            signatories,
+            required,
+            creator
         }
     }
     pub fn entry(&self) -> Entry {
@@ -60,11 +63,21 @@ pub fn create(title: String, description: String) -> ZomeApiResult<Address> {
     let new_multisig = Multisig::new(title, description);
     let new_multisig_entry = new_multisig.entry();
     let new_multisig_address = hdk::commit_entry(&new_multisig_entry)?;
+    hdk::link_entries(&AGENT_ADDRESS, &new_multisig_address, "user->multisigs", "")?;
     Ok(new_multisig_address)
 }
 
 pub fn get(address: Address) -> ZomeApiResult<Multisig> {
     Multisig::get(address)
+}
+
+pub fn get_my_multisigs() -> ZomeApiResult<Vec<Address>> {
+    let links = hdk::get_links(
+        &AGENT_ADDRESS,
+        LinkMatch::Exactly("user->multisigs"),
+        LinkMatch::Any,
+    )?;
+    Ok(links.addresses())
 }
 
 /***********Multisig Entry Def */
@@ -76,9 +89,51 @@ pub fn entry_def() -> ValidatingEntryType {
         validation_package: || {
             hdk::ValidationPackageDefinition::Entry
         },
-        validation: | _validation_data: hdk::EntryValidationData<Multisig> | {
-            Ok(())
+        validation: | validation_data: hdk::EntryValidationData<Multisig> | {
+            match validation_data {
+                EntryValidationData::Create { entry, validation_data } => {
+                    if !validation_data.sources().contains(&entry.creator) {
+                        return Err(String::from("Only the owner can create their multisigs"));
+                    }
+                    validate_multisig(&entry)
+                },
+                EntryValidationData::Modify { new_entry: _, old_entry: _, validation_data: _, .. } => {
+                    return Err(String::from("Cannot modify"));
+                },
+                EntryValidationData::Delete {old_entry: _, validation_data: _, .. } => {
+                    return Err(String::from("Cannot delete"));
+                }
+            }
         },
-        links: []
+        links: [
+            from!( 
+              "%agent_id",
+              link_type: "user->multisigs",
+              validation_package: || {
+                  hdk::ValidationPackageDefinition::Entry
+              }              ,
+              validation: | _validation_data: hdk::LinkValidationData | {
+                // TODO: Homework. Implement validation rules if required.
+                Ok(())
+              }
+          )
+        ]
     )
 }
+
+/*********************** Multisig Validations */
+fn validate_multisig(entry: &Multisig) -> Result<(), String> {
+    if entry.title.len() == 0 {
+        Err("Multisig title cannot be null".into())
+    } else if entry.title.len() >=50 {
+        Err("Multisig title too long, max 14 characters".into())
+    } else if entry.description.len() == 0 {
+        Err("Multisig description cannot be null".into())
+    } else if entry.description.len() >= 150 {
+        Err("Multisig description too long, max 50 characters".into())
+    }  else {
+        Ok(())
+    }
+}
+
+/********************************************** */

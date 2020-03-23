@@ -78,6 +78,11 @@ mod my_zome {
         multisig::get(address)
     }
 
+    #[zome_fn("hc_public")]
+    fn get_my_multisigs() -> ZomeApiResult<Vec<Address>> {
+        multisig::get_my_multisigs()
+    }
+
     /************ Multisig Functions Getters */
 
     

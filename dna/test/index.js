@@ -76,8 +76,9 @@ orchestrator.registerScenario("Scenario1: Create Multisig", async (s, t) => {
   t.deepEqual(multisig, {
     title: "My Multisig",
     description: "This creates a new multisig",
-    owners: [alice.instance("multisig_test").agentAddress],
-    required: 1
+    signatories: [alice.instance("multisig_test").agentAddress],
+    required: 1,
+    creator: alice.instance("multisig_test").agentAddress
   })
   await s.consistency();
 
@@ -100,8 +101,9 @@ orchestrator.registerScenario("Scenario2: Create and fetch Multisig", async (s, 
   t.deepEqual(multisig, {
     title: "My Multisig",
     description: "This creates a new multisig",
-    owners: [alice.instance("multisig_test").agentAddress],
-    required: 1
+    signatories: [alice.instance("multisig_test").agentAddress],
+    required: 1,
+    creator: alice.instance("multisig_test").agentAddress,
   })
   await s.consistency();
 
@@ -113,6 +115,34 @@ orchestrator.registerScenario("Scenario2: Create and fetch Multisig", async (s, 
   )
   console.log("fetchedMultisig", fetchedMultisig);
   t.deepEqual(multisig, fetchedMultisig.Ok);
+  await s.consistency();
+
+})
+
+orchestrator.registerScenario("Scenario3: Create many", async (s, t) => {
+
+  const  {alice, bob } = await s.players(
+    { alice: conductorConfig, bob: conductorConfig }, 
+    true
+  );
+
+  const multisig_addr1 = await createMultisig(alice, "My Multisig1", "This creates a new multisig")
+  t.ok(multisig_addr1);
+  await s.consistency();
+
+  const multisig_addr2 = await createMultisig(alice, "My Multisig2", "This creates a new multisig")
+  t.ok(multisig_addr2);
+  await s.consistency();
+  
+
+  const myMultisigs = await alice.call(
+    "multisig_test", 
+    "create_multisig", 
+    "get_my_multisigs",
+    {}
+  )
+  console.log("fetchedMultisigs", myMultisigs);
+  t.equal(2, myMultisigs.Ok.length);
   await s.consistency();
 
 })

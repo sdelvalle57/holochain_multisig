@@ -12,7 +12,7 @@ test_agent = true
 
 [[dnas]]
 file = '/home/holomachine/projects/multisig/dna/dist/dna.dna.json'
-hash = 'QmRReRBTCHvriyjjTgdZq2km23sPfV8AKyLDyQ4bqdPabF'
+hash = 'QmTbiz3dghMvWHTMMeyh2naaH2euSALdckLDQP7JANFUWS'
 id = 'hc-run-dna'
 
 [[instances]]

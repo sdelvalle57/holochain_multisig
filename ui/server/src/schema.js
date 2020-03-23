@@ -5,6 +5,7 @@ const typeDefs = gql`
     type Query {
         myAddress: MyAddress,
         getMultisig(address: String!): Multisig
+        getMyMultisigs: [Multisig]!
     }
 
     type Mutation {
@@ -22,8 +23,10 @@ const typeDefs = gql`
     type Multisig {
         title: String!,
         description: String!,
-        owners: [String!]!,
-        required: Int!
+        signatories: [String!]!,
+        required: Int!,
+        creator: String!,
+        address: String
     }
 `;
 
