@@ -9,24 +9,20 @@ Installation
 4. Set service name in `apollo.config.js` :
     In the client folder:
 
-        ````
             module.exports = {
                 client: {
                 name: 'Holochain Multisig [web]',
                 service: `the name of your service set in https://engine.apollographql.com/`,
                 },
             };
-        ````
     
     In the server folder
-    
-        ````
+
             module.exports = {
                 service: {
                 name: `the name of your service set in https://engine.apollographql.com/`
                 }
             } 
-        ````
 
 
 5. `cd ui/client` -> `npm run codegen`
