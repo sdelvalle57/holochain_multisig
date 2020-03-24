@@ -5,7 +5,8 @@ import { navigate } from "@reach/router"
 
 import { CreateMultisig, CreateMultisigVariables } from '../__generated__/CreateMultisig';
 
-import { CreateMultisigForm, Loading, Error } from '../components';
+
+import { CreateMultisigForm } from '../components';
 import {CREATE_MULTISIG} from '../mutations';
 
 
@@ -21,7 +22,7 @@ import {CREATE_MULTISIG} from '../mutations';
             }
         }
     );
-    if (loading) return <Loading />;
-    if (error) return <Error error={error}/>;
-    return <CreateMultisigForm createMultisig={createMultisig} />
+    return <CreateMultisigForm loading={loading} error={error} createMultisig={createMultisig} />
  }
+
+ 

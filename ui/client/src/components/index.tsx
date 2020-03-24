@@ -1,7 +1,6 @@
 export { default as Button } from './button';
 export { default as Footer } from './footer';
 export { default as Header } from './header';
-export { default as LaunchTile } from './launch-tile';
 export { default as Loading } from './loading';
 export { default as CreateMultisigForm } from './create-multisig-form';
 export { default as MenuItem } from './menu-item';
