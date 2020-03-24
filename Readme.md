@@ -13,7 +13,7 @@ Installation
             module.exports = {
                 client: {
                     name: 'Holochain Multisig [web]',
-                    service: `the name of your service set in `https://engine.apollographql.com/,
+                    service: 'the name of your service set in step 3',
                 },
             };
     
@@ -21,7 +21,7 @@ Installation
 
             module.exports = {
                 service: {
-                    name: `the name of your service set in `https://engine.apollographql.com/
+                    name: 'the name of your service set in set in step 3'
                 }
             } 
 
