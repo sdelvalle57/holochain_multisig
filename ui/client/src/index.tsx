@@ -1,3 +1,4 @@
+
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
@@ -10,9 +11,12 @@ import {typeDefs} from './resolvers';
 import Pages from './pages';
 import injectStyles from './styles';
 
+
 const cache = new InMemoryCache();
+const SERVER_PORT = process.env.REACT_APP_SERVER_PORT ? process.env.REACT_APP_SERVER_PORT : 4000;
+console.log(SERVER_PORT, process.env.REACT_APP_SERVER_PORT, process.env.PORT)
 const link = new HttpLink({
-  uri: 'http://localhost:4000/'
+  uri: `http://localhost:${SERVER_PORT}/`
 });
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({

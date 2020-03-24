@@ -23,11 +23,16 @@
     "typescript": "^3.7.3"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "PORT=3000 && react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
-    "run:ios-demo": "npx artillery run apollo-internal-demos/ios-workload.yml",
-    "codegen": "apollo client:codegen --target typescript --watch"
+    "codegen": "apollo client:codegen --target typescript --watch",
+    "start:server": "cd ../../ui/server/ && npm run start:agents",
+    "ui:alice": "REACT_APP_SERVER_PORT=4000 PORT=8080 react-app-rewired start",
+    "ui:bob": "REACT_APP_SERVER_PORT=4001 PORT=8081 react-app-rewired start",
+    "hc:alice": "cd ../../dna && hc run --agent-name alice --networked sim2h",
+    "hc:bob": "cd ../../dna && hc run --agent-name bob -p 8889 --networked sim2h",
+    "demo": "concurrently \"npm run hc:alice\" \"npm run hc:bob\" \"npm run start:server\" \"npm run ui:alice\" \"npm run ui:bob\""
   },
   "resolutions": {
     "@types/graphql": "14.0.1",
@@ -48,6 +53,7 @@
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
     "@types/jest": "^24.0.23",
+    "concurrently": "^5.0.2",
     "apollo": "^2.16.3",
     "artillery": "^1.6.0-26",
     "customize-cra": "^0.9.1",

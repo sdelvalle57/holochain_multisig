@@ -5,8 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon src/index.js",
-    "start:ci": "node src/index.js"
+    "start": "AGENT_PORT=8889 nodemon src/index.js",
+    "start:alice": "AGENT_PORT=8888 PORT=4000 nodemon src/index.js",
+    "start:bob": "AGENT_PORT=8889 PORT=4001 nodemon src/index.js",
+    "start:agents": "concurrently \"npm run start:alice\" \"npm run start:bob\""
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "apollo-link": "^1.2.3",
     "apollo-link-http": "^1.5.5",
+    "concurrently": "^5.0.2",
     "jest": "^23.6.0",
     "nock": "^10.0.2",
     "node-fetch": "^2.2.1"
