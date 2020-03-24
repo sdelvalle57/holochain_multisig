@@ -5,15 +5,16 @@ Steps:
 Installation
 1. `cd ui/client` -> `npm i`
 2. `cd ui/server` -> `npm i`
-3. Set `ENGINE_API_KEY` in the `.env` file, https://engine.apollographql.com/, follow step 4 of the tutorial: https://www.apollographql.com/docs/tutorial/production/
-4. Set service name in `apollo.config.js` :
+3. create `.env` file in both client and server
+4. Set `ENGINE_API_KEY` in the `.env` files, https://engine.apollographql.com/, follow step 4 of the tutorial: https://www.apollographql.com/docs/tutorial/production/
+5. Set service name in `apollo.config.js` :
     
     In the client folder:
 
             module.exports = {
                 client: {
                     name: 'Holochain Multisig [web]',
-                    service: 'the name of your service set in step 3',
+                    service: 'the name of your service set in step 4',
                 },
             };
     
@@ -21,13 +22,13 @@ Installation
 
             module.exports = {
                 service: {
-                    name: 'the name of your service set in set in step 3'
+                    name: 'the name of your service set in set in step 4'
                 }
             } 
 
 
-5. `cd ui/client` -> `npm run codegen`
-6. `nix-shell`-> `cd dna` -> `hc test` or `hc package`
+6. `cd ui/client` -> `npm run codegen`
+7. `nix-shell`-> `cd dna` -> `hc test` or `hc package`
 
 
 Run the Client
