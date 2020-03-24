@@ -7,6 +7,7 @@ Installation
 2. `cd ui/server` -> `npm i`
 3. Set `ENGINE_API_KEY` in the `.env` file, https://engine.apollographql.com/
 4. Set service name in `apollo.config.js` :
+    
     In the client folder:
 
             module.exports = {
