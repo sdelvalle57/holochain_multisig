@@ -12,16 +12,16 @@ Installation
 
             module.exports = {
                 client: {
-                name: 'Holochain Multisig [web]',
-                service: `the name of your service set in https://engine.apollographql.com/`,
+                    name: 'Holochain Multisig [web]',
+                    service: `the name of your service set in `https://engine.apollographql.com/,
                 },
             };
     
-    In the server folder
+    In the server folder:
 
             module.exports = {
                 service: {
-                name: `the name of your service set in https://engine.apollographql.com/`
+                    name: `the name of your service set in `https://engine.apollographql.com/
                 }
             } 
 
@@ -36,4 +36,4 @@ Run the Client
 3. `nix-shell` -> `cd ui/client` -> `npm run demo`
 4. Navigate to http://localhost:8080 for Alice and http://localhost:8081 for Bob 
 
-Notes. To Test queries and mutations go to http://localhost:4000 and http://localhost:4001
+Notes. To Test queries and mutations go to http://localhost:4000 for Alice and http://localhost:4001 for Bob
