@@ -6,7 +6,7 @@ use hdk::{
 };
 
 use hdk::holochain_core_types::dna::entry_types::Sharing;
-use hdk::holochain_core_types::{entry::Entry, validation::EntryValidationData};
+use hdk::holochain_core_types::{entry::Entry, validation::EntryValidationData, validation::LinkValidationData};
 use holochain_wasm_utils::api_serialization::{
     get_entry::{GetEntryOptions, GetEntryResult},
     get_links::GetLinksOptions,
@@ -68,6 +68,7 @@ pub fn create(title: String, description: String) -> ZomeApiResult<Address> {
 }
 
 pub fn get(address: Address) -> ZomeApiResult<Multisig> {
+    //hdk::debug(format!("New message from: {:?}", "hola mijo")).ok();
     Multisig::get(address)
 }
 
@@ -112,9 +113,38 @@ pub fn entry_def() -> ValidatingEntryType {
               validation_package: || {
                   hdk::ValidationPackageDefinition::Entry
               }              ,
-              validation: | _validation_data: hdk::LinkValidationData | {
-                // TODO: Homework. Implement validation rules if required.
-                Ok(())
+              validation: | validation_data: hdk::LinkValidationData | {
+                match validation_data {
+                    LinkValidationData::LinkAdd { link , ..} => {
+                        let my_multisigs: Vec<Address> = get_my_multisigs()?;
+                        let target: Address = link.link.target().clone();
+                        if my_multisigs.contains(&target) {
+                            return Err(String::from("Cannot create multisig with the same data"));
+                        }
+           
+                      Ok(())
+                   },
+                   LinkValidationData::LinkRemove { ..} => {
+                       Ok(())
+                   }
+                }
+                //   match validation_data {
+                //     LinkValidationData::LinkAdd {link} => {
+                //        let base: Address = link.link.base().clone();
+
+                //         // let links = hdk::get_links(
+                //         //     &AGENT_ADDRESS,
+                //         //     LinkMatch::Exactly("user->multisigs"),
+                //         //     LinkMatch::Any,
+                //         // )?;
+                //         Ok(())
+
+                //     }
+
+                //     LinkValidationData::LinkRemove { ..} => {
+                //         return Err(String::from("Cannot remove links"));
+                //     }
+                //   }
               }
           )
         ]

@@ -49,7 +49,7 @@ class MyAddressAPI extends RESTDataSource {
     async getAll() {
         let addresses = await this.callZome(process.env.INSTANCE_NAME, process.env.ZOME_CREATE_MULTISIG, getAll)({})
         addresses = JSON.parse(addresses).Ok;
-        console.log(addresses.length)
+        console.log("addressss" , addresses)
         const multisigs = []
         for(let j = 0; j < addresses.length; j++) {
             const response = await this.get(addresses[j]);

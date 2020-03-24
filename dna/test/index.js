@@ -141,8 +141,36 @@ orchestrator.registerScenario("Scenario3: Create many", async (s, t) => {
     "get_my_multisigs",
     {}
   )
-  console.log("fetchedMultisigs", myMultisigs);
   t.equal(2, myMultisigs.Ok.length);
+  await s.consistency();
+
+})
+
+orchestrator.registerScenario("Scenario4: Create two with the same data", async (s, t) => {
+
+  const  {alice, bob } = await s.players(
+    { alice: conductorConfig, bob: conductorConfig }, 
+    true
+  );
+
+  const multisig_addr1 = await createMultisig(alice, "My Multisig1", "This creates a new multisig")
+  t.ok(multisig_addr1);
+  await s.consistency();
+
+  const multisig_addr2 = await createMultisig(alice, "My Multisig1", "This creates a new multisig")
+  console.log("multisig_addr2", multisig_addr2);
+  t.ok(multisig_addr2.Err);
+  await s.consistency();
+  
+
+  const myMultisigs = await alice.call(
+    "multisig_test", 
+    "create_multisig", 
+    "get_my_multisigs",
+    {}
+  )
+  console.log("fetchedMultisigs", myMultisigs);
+  t.equal(1, myMultisigs.Ok.length);
   await s.consistency();
 
 })
