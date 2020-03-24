@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { RouteComponentProps } from '@reach/router';
 
-import {InnerContainer, StyledLink} from '../components/container';
+import {InnerContainer, StyledLink} from './global-containers';
 
 import {GET_ALL_MULTISIGS} from '../queries';
 import { Multisigs } from '../__generated__/Multisigs';

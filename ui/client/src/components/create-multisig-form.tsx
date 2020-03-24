@@ -3,6 +3,7 @@ import styled, { css, keyframes } from 'react-emotion';
 import { size, lighten } from 'polished';
 
 import {Button, Loading, Error} from '.';
+import { StyledForm, StyledInput} from './global-containers'
 import { ReactComponent as Logo } from '../assets/logo.svg';
 import { ReactComponent as Reload } from '../assets/reload.svg';
 import { colors, unit } from '../styles';
@@ -155,24 +156,4 @@ const Heading = styled('h1')({
   margin: `${unit * 3}px 0 ${unit * 6}px`,
 });
 
-const StyledForm = styled('form')({
-  width: '100%',
-  maxWidth: 406,
-  padding: unit * 3.5,
-  borderRadius: 3,
-  boxShadow: '6px 6px 1px rgba(0, 0, 0, 0.25)',
-  color: colors.text,
-  backgroundColor: 'white',
-});
 
-const StyledInput = styled('input')({
-  width: '100%',
-  marginBottom: unit * 2,
-  padding: `${unit * 1.25}px ${unit * 2.5}px`,
-  border: `1px solid ${colors.grey}`,
-  fontSize: 16,
-  outline: 'none',
-  ':focus': {
-    borderColor: colors.primary,
-  },
-});

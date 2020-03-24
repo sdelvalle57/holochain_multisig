@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { RouteComponentProps } from '@reach/router';
 
-import {Container} from '../components/container';
+import {Container} from '../components/global-containers';
 
 import { GET_MULTISIG } from '../queries';
 import { MultisigVariables, Multisig } from '../__generated__/Multisig';

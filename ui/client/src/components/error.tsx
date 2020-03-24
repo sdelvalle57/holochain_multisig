@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 
 import { colors } from '../styles';
-import { InnerContainer } from './container';
+import { InnerContainer } from './global-containers';
 import { ApolloError } from 'apollo-client';
 
 export interface ErrorProps {

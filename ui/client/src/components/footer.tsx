@@ -6,7 +6,7 @@ import { ReactComponent as HomeIcon } from '../assets/icons/home.svg';
 import { ReactComponent as CartIcon } from '../assets/icons/cart.svg';
 import { ReactComponent as ProfileIcon } from '../assets/icons/profile.svg';
 import { colors } from '../styles';
-import { InnerContainer } from './container';
+import { InnerContainer } from './global-containers';
 
 export default function Footer() {
   return (

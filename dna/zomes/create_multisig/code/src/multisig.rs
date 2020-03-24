@@ -67,8 +67,8 @@ pub fn create(title: String, description: String) -> ZomeApiResult<Address> {
     Ok(new_multisig_address)
 }
 
+
 pub fn get(address: Address) -> ZomeApiResult<Multisig> {
-    //hdk::debug(format!("New message from: {:?}", "hola mijo")).ok();
     Multisig::get(address)
 }
 

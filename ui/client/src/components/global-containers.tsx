@@ -51,5 +51,28 @@ import { lighten } from 'polished';
     },
   });
 
+
+  export const StyledForm = styled('form')({
+    width: '100%',
+    maxWidth: 406,
+    padding: unit * 3.5,
+    borderRadius: 3,
+    boxShadow: '6px 6px 1px rgba(0, 0, 0, 0.25)',
+    color: colors.text,
+    backgroundColor: 'white',
+  });
+  
+  export const StyledInput = styled('input')({
+    width: '100%',
+    marginBottom: unit * 2,
+    padding: `${unit * 1.25}px ${unit * 2.5}px`,
+    border: `1px solid ${colors.grey}`,
+    fontSize: 16,
+    outline: 'none',
+    ':focus': {
+      borderColor: colors.primary,
+    },
+  });
+
   
   

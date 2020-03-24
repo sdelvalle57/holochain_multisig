@@ -20,7 +20,7 @@ use hdk::prelude::*;
 
 use hdk::holochain_json_api::{error::JsonError, json::JsonString};
 use hdk::holochain_persistence_api::cas::content::Address;
-use hdk::AGENT_ADDRESS;
+use hdk::{AGENT_ADDRESS, THIS_INSTANCE};
 use hdk_proc_macros::zome;
 
 //use std::convert::TryInto;
@@ -28,6 +28,7 @@ use hdk_proc_macros::zome;
 /******************************** */
 
 mod multisig;
+mod transaction;
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson, Clone)]
 pub struct MyEntry {
@@ -39,6 +40,7 @@ mod my_zome {
 
     #[init]
     fn init() {
+        hdk::debug(format!("New message from: {:?}", THIS_INSTANCE)).ok();
         Ok(())
     }
 

@@ -6,7 +6,7 @@ import { RouteComponentProps } from '@reach/router';
 
 import { MyAddress } from '../__generated__/MyAddress';
 
-import {Container} from '../components/container';
+import {Container} from '../components/global-containers';
 import CreateMultisigContainer from './create-multisig';
 import {MyMultisigs} from '../components'
 
