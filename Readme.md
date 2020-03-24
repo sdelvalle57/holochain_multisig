@@ -5,7 +5,7 @@ Steps:
 Installation
 1. `cd ui/client` -> `npm i`
 2. `cd ui/server` -> `npm i`
-3. Set `ENGINE_API_KEY` in the `.env` file, https://engine.apollographql.com/
+3. Set `ENGINE_API_KEY` in the `.env` file, https://engine.apollographql.com/, follow step 4 of the tutorial: https://www.apollographql.com/docs/tutorial/production/
 4. Set service name in `apollo.config.js` :
     
     In the client folder:
