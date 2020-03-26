@@ -52,3 +52,18 @@ impl Transaction{
     }
 
 }
+
+// Helper for handling decoding of entry data to requested entry struct type
+// pub (crate) fn try_decode_entry<R>(entry: ZomeApiResult<Option<Entry>>) -> ZomeApiResult<Option<R>>
+//     where R: TryFrom<AppEntryValue>,
+// {
+//     match entry {
+//         Ok(Some(AppEntry(_, entry_value))) => {
+//             match R::try_from(entry_value.to_owned()) {
+//                 Ok(val) => Ok(Some(val)),
+//                 Err(_) => Err(ZomeApiError::Internal("ERR_MSG_ENTRY_WRONG_TYPE".to_string())),
+//             }
+//         },
+//         _ => Err(ZomeApiError::Internal("ERR_MSG_ENTRY_NOT_FOUND".to_string())),
+//     }
+// }

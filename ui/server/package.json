@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "AGENT_PORT=8889 nodemon src/index.js",
-    "start:alice": "AGENT_PORT=8888 PORT=4000 nodemon src/index.js",
-    "start:bob": "AGENT_PORT=8889 PORT=4001 nodemon src/index.js",
+    "start:alice": "AGENT_PORT=8888 INSTANCE_NAME=alice-instance PORT=4000 nodemon src/index.js",
+    "start:bob": "AGENT_PORT=8889 INSTANCE_NAME=bob-instance PORT=4001 nodemon src/index.js",
     "start:agents": "concurrently \"npm run start:alice\" \"npm run start:bob\""
   },
   "author": "",

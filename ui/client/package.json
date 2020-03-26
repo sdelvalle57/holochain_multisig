@@ -30,9 +30,10 @@
     "start:server": "cd ../../ui/server/ && npm run start:agents",
     "ui:alice": "REACT_APP_SERVER_PORT=4000 PORT=8080 react-app-rewired start",
     "ui:bob": "REACT_APP_SERVER_PORT=4001 PORT=8081 react-app-rewired start",
-    "hc:alice": "cd ../../dna && hc run --agent-name alice --networked sim2h",
-    "hc:bob": "cd ../../dna && hc run --agent-name bob -p 8889 --networked sim2h",
-    "demo": "concurrently \"npm run hc:alice\" \"npm run hc:bob\" \"npm run start:server\" \"npm run ui:alice\" \"npm run ui:bob\""
+    "hc:bob": "cd ../../dna && holochain ",
+    "start:ui": "concurrently \"npm run ui:alice\" \"npm run ui:bob\"",
+    "start:apollo-server": "cd ../../ui/server/ && npm run start:agents",
+    "start:holochain": "cd ../../dna && holochain -c conductor-config.toml"
   },
   "resolutions": {
     "@types/graphql": "14.0.1",

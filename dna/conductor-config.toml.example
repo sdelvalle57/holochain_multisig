@@ -1,0 +1,103 @@
+bridges = []
+persistence_dir = ''
+ui_bundles = []
+ui_interfaces = []
+
+
+[[agents]]
+id = 'hc-alice'
+keystore_file = './alice.keystore'
+name = 'alice'
+public_address = 'HcScijzE9x3Qjogoz9xOK4NjxFNthmf9br9ow8tN7PUb6djyAoWu5rKuhrsq93i'
+
+
+[[agents]]
+id = 'hc-bob'
+keystore_file = './bob.keystore'
+name = 'bob'
+public_address = 'HcSCjoiU46sN787haaPA8z9QJ87WF64tx4agaka44D3dx7h8k45UdS9aPTF3koa'
+
+
+[[dnas]]
+file = '/home/holomachine/projects/multisig/dna/dist/dna.dna.json'
+hash = 'QmPVyqjYDT9CWSmFHmaDyRbsWJBuxpmJKaS49gVHMAsSq6'
+id = 'hc-multisig'
+
+
+[[instances]]
+agent = 'hc-alice'
+dna = 'hc-multisig'
+id = 'alice-instance'
+
+    [instances.storage]
+    type = 'memory'
+
+
+[[instances]]
+agent = 'hc-bob'
+dna = 'hc-multisig'
+id = 'bob-instance'
+
+    [instances.storage]
+    type = 'memory'
+
+
+[[interfaces]]
+admin = true
+id = 'alice-interface'
+
+[[interfaces]]
+admin = true
+id = 'bob-interface'
+
+
+[[interfaces.instances]]
+id = 'alice-instance'
+
+    [interfaces.driver]
+    port = 8888
+    type = 'websocket'
+
+    [logger]
+    state_dump = true
+    type = 'error'
+
+    [logger.rules]
+    rules = []
+
+    [network]
+    sim2h_url = 'ws://localhost:9000'
+    type = 'sim2h'
+
+    [passphrase_service]
+    type = 'cmd'
+
+    [signals]
+    consistency = false
+    trace = false
+
+
+[[interfaces.instances]]
+id = 'bob-instance'
+
+    [interfaces.driver]
+    port = 8889
+    type = 'websocket'
+
+    [logger]
+    state_dump = true
+    type = 'error'
+
+    [logger.rules]
+    rules = []
+
+    [network]
+    sim2h_url = 'ws://localhost:9000'
+    type = 'sim2h'
+
+    [passphrase_service]
+    type = 'cmd'
+
+    [signals]
+    consistency = false
+    trace = false
