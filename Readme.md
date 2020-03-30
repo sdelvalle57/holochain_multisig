@@ -34,7 +34,7 @@ Installation
 Run the Client
 1. `nix-shell` -> `sim2h_server`
 2. Open another terminal on the root project, will run 2 agents(alice -> 8888, bob -> 8889)
-3. `nix-shell` -> `cd ui/client` -> `npm run start:holochain -c conductor-config.toml`
+3. `nix-shell` -> `cd ui/client` -> `npm run start:holochain`
 4. Open another terminal on the root project, will run two apollo server instances (alice->4000, bob->4001)
 5. `cd ui/client` -> `npm run start:apollo-server`
 6.  Open another terminal on the root project, Navigate to http://localhost:8080 for Alice and http://localhost:8081 for Bob
